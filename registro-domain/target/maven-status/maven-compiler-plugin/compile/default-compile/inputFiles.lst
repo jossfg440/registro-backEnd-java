@@ -1,0 +1,3 @@
+/Users/josegarcia/Documents/workspace-spring-tool-suite-4-4.14.1.RELEASE/ec.gob.como/registro-domain/src/main/java/ec/gob/como/domain/data/ClienteDto.java
+/Users/josegarcia/Documents/workspace-spring-tool-suite-4-4.14.1.RELEASE/ec.gob.como/registro-domain/src/main/java/ec/gob/como/domain/port/ClientePersistenciaPort.java
+/Users/josegarcia/Documents/workspace-spring-tool-suite-4-4.14.1.RELEASE/ec.gob.como/registro-domain/src/main/java/ec/gob/como/domain/exception/ClienteNoExisteException.java
