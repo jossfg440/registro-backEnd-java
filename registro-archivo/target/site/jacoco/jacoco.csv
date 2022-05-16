@@ -1,4 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-registro-archivo,ec.gob.como.archivo.operacion,ManipulaJsonFile,77,0,2,0,24,0,3,0,2,0
-registro-archivo,ec.gob.como.archivo.operacion,ManipulaXmlFile,101,0,6,0,30,0,6,0,3,0
-registro-archivo,ec.gob.como.archivo.adapter,TipoBeneficioArchivoAdapter,21,0,2,0,7,0,3,0,2,0

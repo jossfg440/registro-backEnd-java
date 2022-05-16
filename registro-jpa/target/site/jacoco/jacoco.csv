@@ -1,4 +1,0 @@
-GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
-registro-jpa,ec.gob.como.jpa.model,ClienteEntity.ClienteEntityBuilder,31,42,0,0,0,1,1,7,1,7
-registro-jpa,ec.gob.como.jpa.model,ClienteEntity,248,28,46,0,1,3,36,4,13,4
-registro-jpa,ec.gob.como.jpa.adapter,ClienteJpaAdapter,83,34,4,0,25,13,7,3,5,3

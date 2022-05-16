@@ -15,9 +15,15 @@ public class TipoBeneficioArchivoAdapter implements TipoBeneficioArchivoPort{
 	
 	
 	
-	public TipoBeneficioArchivoAdapter(ManipulaJsonFile manipulaJsonFile, ManipulaXmlFile manipulaXmlFile) {
+	public TipoBeneficioArchivoAdapter(ManipulaJsonFile manipulaJsonFile) {
 		
 		this.manipulaJsonFile = manipulaJsonFile;
+		
+	}
+	
+	public TipoBeneficioArchivoAdapter( ManipulaXmlFile manipulaXmlFile) {
+		
+	
 		this.manipulaXmlFile = manipulaXmlFile;
 	}
 

@@ -6,6 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 @SpringBootApplication
+//(scanBasePackages = {"test"} , exclude = JpaRepositoriesAutoConfiguration.class)
 @EnableTransactionManagement
 public class ClienteAplicacionLauncher {
 	public static void main(String[] args) {
