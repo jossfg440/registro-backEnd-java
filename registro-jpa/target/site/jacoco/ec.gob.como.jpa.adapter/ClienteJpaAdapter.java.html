@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="es"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ClienteJpaAdapter.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">registro-jpa</a> &gt; <a href="index.source.html" class="el_package">ec.gob.como.jpa.adapter</a> &gt; <span class="el_source">ClienteJpaAdapter.java</span></div><h1>ClienteJpaAdapter.java</h1><pre class="source lang-java linenums">package ec.gob.como.jpa.adapter;
+
+import lombok.SneakyThrows;
+
+
+import ec.gob.como.domain.data.ClienteDto;
+import ec.gob.como.domain.port.ClientePersistenciaPort;
+import ec.gob.como.jpa.model.ClienteEntity;
+import ec.gob.como.jpa.repository.ClienteRepository;
+
+import org.springframework.stereotype.Service;
+import java.util.List;
+import java.util.Objects;
+
+import java.util.stream.Collectors;
+
+@Service
+public class ClienteJpaAdapter implements ClientePersistenciaPort {
+
+	private ClienteRepository clienteRepository;
+	
+<span class="fc" id="L22">	public ClienteJpaAdapter(ClienteRepository clienteRepository) {</span>
+	
+<span class="fc" id="L24">		this.clienteRepository = clienteRepository;</span>
+<span class="fc" id="L25">	}</span>
+
+	@Override
+	public void addCliente(ClienteDto clienteDto) {
+<span class="fc" id="L29">		final ClienteEntity clienteEntity = getClienteEntity(clienteDto);</span>
+<span class="fc" id="L30">		clienteRepository.save(clienteEntity);</span>
+		
+<span class="fc" id="L32">	}</span>
+
+	@Override
+	public void removeCliente(ClienteDto clienteDto) {
+<span class="nc" id="L36">		clienteRepository.deleteAllByNombre(clienteDto.getNombre());</span>
+		
+<span class="nc" id="L38">	}</span>
+
+	@Override
+	public void updateCliente(ClienteDto clienteDto) {
+<span class="nc" id="L42">		final ClienteEntity buscandoPorNombre = clienteRepository.findByNombre(clienteDto.getNombre());</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">		if(Objects.nonNull(buscandoPorNombre)) {</span>
+<span class="nc" id="L44">			buscandoPorNombre.setNombre(clienteDto.getNombre());</span>
+<span class="nc" id="L45">			clienteRepository.save(buscandoPorNombre);</span>
+<span class="nc" id="L46">		} else {</span>
+<span class="nc" id="L47">			final ClienteEntity buscandoPorTipoBeneficio = clienteRepository.findByTipoBeneficio(clienteDto.getTipoBeneficio()) ;</span>
+<span class="nc bnc" id="L48" title="All 2 branches missed.">			if (Objects.nonNull(buscandoPorTipoBeneficio)) {</span>
+<span class="nc" id="L49">				buscandoPorTipoBeneficio.setTipoBeneficio(clienteDto.getTipoBeneficio());</span>
+<span class="nc" id="L50">				clienteRepository.save(buscandoPorTipoBeneficio);</span>
+			}
+		}
+<span class="nc" id="L53">	}</span>
+
+	@Override
+	public List&lt;ClienteDto&gt; getAllClientes() {
+		
+<span class="nc" id="L58">		return clienteRepository.findAll()</span>
+<span class="nc" id="L59">				.stream().map(this::getClientes)</span>
+<span class="nc" id="L60">				.collect(Collectors.toList());</span>
+				
+	}
+
+	@SneakyThrows
+	@Override
+<span class="nc" id="L66">	public ClienteDto getClienteByNombre(String nombre) {</span>
+		
+<span class="nc" id="L68">		return getClientes(clienteRepository.findByNombre(nombre));</span>
+<span class="nc" id="L69">	}</span>
+	
+	private ClienteEntity getClienteEntity(ClienteDto clienteDto){
+<span class="fc" id="L72">		return ClienteEntity.builder()</span>
+<span class="fc" id="L73">				.nombre(clienteDto.getNombre())</span>
+<span class="fc" id="L74">				.email(clienteDto.getEmail())</span>
+<span class="fc" id="L75">				.telefono(clienteDto.getTelefono())</span>
+<span class="fc" id="L76">				.tipoBeneficio(clienteDto.getTipoBeneficio())</span>
+<span class="fc" id="L77">				.beneficio(clienteDto.getBeneficio())</span>
+<span class="fc" id="L78">				.build();</span>
+	}
+	
+	private ClienteDto getClientes(ClienteEntity clienteEntity) {
+<span class="nc" id="L82">		return ClienteDto.builder()</span>
+<span class="nc" id="L83">				.nombre(clienteEntity.getNombre())</span>
+<span class="nc" id="L84">				.email(clienteEntity.getEmail())</span>
+<span class="nc" id="L85">				.telefono(clienteEntity.getTelefono())</span>
+<span class="nc" id="L86">				.tipoBeneficio(clienteEntity.getTipoBeneficio())</span>
+<span class="nc" id="L87">				.beneficio(clienteEntity.getBeneficio())</span>
+<span class="nc" id="L88">				.build();</span>
+	}
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.6.202009150832</span></div></body></html>

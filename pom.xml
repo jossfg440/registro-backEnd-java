@@ -9,6 +9,7 @@
         <module>registro-starter</module>
         <module>registro-test</module>
         <module>registro-rest</module>
+        <module>registro-archivo</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
