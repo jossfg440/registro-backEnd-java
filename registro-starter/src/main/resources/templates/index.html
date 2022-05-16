@@ -1,0 +1,18 @@
+
+ 
+ 
+<form action="#" th:action="@{/cliente}"  method="post">
+    <label for="name">Nombre</label>
+    <input type="text"  id="nombre" placeholder="Nombre"><br/>
+    <label for="email">Email</label>
+    <input type="text" id="email" placeholder="Email"><br/>
+    <label for="email">Telefono</label>
+    <input type="text"  id="telefono" placeholder="Teléfono"><br/>
+    
+   <p> Quiero concursar en el grupo: <p/>
+    SK<input type="radio" th:id="tipoBeneficioSk" th:name="${tipoBeneficio}" value="SK" checked>
+    TH<input type="radio" th:id="tipoBeneficioTh" th:name="${tipoBeneficio}" value="TH" >
+
+    <input type="submit" value="Registro Cliente">   
+</form>
+ <a th:href="@{/cliente}">Lista de Clientes</a>
