@@ -31,21 +31,21 @@ public class ManipulaXmlFile implements TipoBeneficioArchivo{
 		  Document doc = builder.parse(xmlFile);
 		  doc.getDocumentElement().normalize();
 		  
-		  NodeList list = doc.getElementsByTagName("beneficios");
 		
-		  for (int temp = 0; temp < list.getLength(); temp++) {
-
-              Node node = list.item(temp);
-
-              if (node.getNodeType() == Node.ELEMENT_NODE) {
-            	  Element element = (Element) node;
-            	  beneficio = element.getElementsByTagName("beneficio").item(0).getTextContent();
-                  element.getParentNode().removeChild(element);
-            	  temp = list.getLength();
-            	  saveXMLContent(doc,xmlFile);
-                  
-              }
-		  } 
+		  Node beneficiosNode = doc.getElementsByTagName("beneficios").item(0);
+		  NodeList list2 = beneficiosNode.getChildNodes();
+		  for (int i = 0; i < list2.getLength(); i++) {
+	           Node node = list2.item(i);
+	           
+	           //Remove "name" node
+	            if ("beneficio".equals(node.getNodeName())) {
+	               beneficio = node.getTextContent();
+	        	   beneficiosNode.removeChild(node);
+	        	   i = list2.getLength();
+	        	   saveXMLContent(doc,xmlFile);
+	            }  
+	       }
+		  
 		  if (beneficio != "") {
 			  return beneficio;
 		  } else {

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Lista Clientes</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+<body onload="busca_beneficio();">
+<div class="container my-2" align="center">
+  
+<h3>Clientes Registrados</h3>
+
+  
+  <div id=respuesta></div> 
+  
+  <a th:href="@{/}" class="btn btn-primary btn-sm mb-3" >Nuevo Cliente</a>
+
+</div>
+<script type="text/javascript">
+
+
+function busca_beneficio() {
+
+    var search = {}
+    var urlFinal ="/cliente";
+   
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: urlFinal,
+       
+        dataType: 'html',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+          
+
+            console.log("SUCCESS1 : ", data);
+       
+           
+           const res = JSON.parse(data);
+            console.log('d',res,'dt',res.length);
+            
+            var respuesta_html = "<table style='width:80%' border='1'><thead><tr><th>Nombre</th><th>Email</th><th>Telefono</th><th>Grupo</th><th>Acción</th></tr></thead><tbody>";
+         
+           for (var i=0;i<res.length;i++) {
+				console.log('v',res[i]);
+				console.log('q',res[i].nombre);
+			  respuesta_html =respuesta_html+ "<tr><td>"+res[i].nombre+"</td><td>"
+			  +res[i].email+"</td><td>"
+			  +res[i].telefono+"</td><td>"
+			  +res[i].tipoBeneficio+"</td>"
+			  +"<td> <a href='/cliente/'"+res[i].nombre+">Editar</a>&nbsp;<a <a href='/cliente/'"+res[i].nombre+">Eliminar</a> </tr>"
+				
+				
+			}
+			 respuesta_html = respuesta_html+"</tbody></table>";
+			 console.log('resp'+respuesta_html);
+			$('#respuesta').html(respuesta_html);
+          	 
+           
+          
+
+        },
+        error: function (e) {
+
+            var json = "<h4> Respuesta</h4>&lt;pre&gt;"
+                + e.responseText + "&lt;/pre&gt;";
+            $('#respuesta').html(json);
+
+            console.log("ERROR : ", e);
+         
+
+        }
+    });
+
+}
+</script>
+</body>
+</html>

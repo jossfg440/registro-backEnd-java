@@ -14,10 +14,7 @@ public class TipoBeneficioServiceImpl implements TipoBeneficioService {
 	
 	private final TipoBeneficioArchivoPort tipoBeneficioArchivoPort;
 	
-	/*
-	public TipoBeneficioServiceImpl() {
-		this.tipoBeneficioArchivoPort = null;
-	}*/
+	
 	
 	
 	public  TipoBeneficioServiceImpl(TipoBeneficioArchivoPort tipoBeneficioArchivoPort) {

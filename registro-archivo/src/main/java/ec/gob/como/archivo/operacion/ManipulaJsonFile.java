@@ -1,11 +1,12 @@
 package ec.gob.como.archivo.operacion;
 
-import java.io.BufferedWriter;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+
 import java.io.Reader;
 
 import org.json.simple.JSONArray;
@@ -40,18 +41,14 @@ public class ManipulaJsonFile implements TipoBeneficioArchivo {
 			    try (
 			    
 			    	FileWriter file = new FileWriter("classpath:sk_formato.json")) {
-		            //file.write(jsonObject.toJSONString());
-		            //file.close();
+		            file.write(jsonObject.toJSONString());
+		            file.flush();
 		            
-		            BufferedWriter writer = new BufferedWriter(new FileWriter("classpath:sk_formato.json"));
-		            writer.write(jsonObject.toJSONString());
-		            writer.close();
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
 			    return beneficio;
-			    //JSONObject obj2 = new JSONObject();
-			    //obj2.put("sk_formato" , skFormatoList);
+			  
 			} else {
 				return "No existe beneficio";
 			}

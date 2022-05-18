@@ -20,12 +20,12 @@
     <input type="text" name="telefono" id="telefono" placeholder="Teléfono"><br/>
     
    <p> Quiero concursar en el grupo: <p/>
-    SK<input type="radio" th:id="tipoBeneficio" name="tipoBeneficio" value="SK" checked>
-    TH<input type="radio" th:id="tipoBeneficio" name="tipoBeneficio" value="TH" >
+    SK<input type="radio" id="tipoBeneficioSk" name="tipoBeneficio"  value="SK" checked>
+    TH<input type="radio" id="tipoBeneficioTh" name="tipoBeneficio"  value="TH" >
 	<input type="hidden" name="beneficio" id="beneficio" >
     <input type="button" value="Registro Cliente"  onClick="busca_beneficio();">   
 </form>
- <a th:href="@{/cliente}">Lista de Clientes</a>
+ <a th:href="@{/lista}">Lista de Clientes</a>
  
 </div>
 <script type="text/javascript">
@@ -34,7 +34,16 @@
 function busca_beneficio() {
 
     var search = {}
-    var tipoBeneficio = $("#tipoBeneficio").val();
+    var tipoBeneficio="";
+    console.log('lis',$("#tipoBeneficioSk").is(":checked") );
+    if( $("#tipoBeneficioSk").is(":checked") ){
+					$("#tipoBeneficioSk").val("SK");
+					tipoBeneficio="SK";
+				} else {
+					$("#tipoBeneficioSk").val("TH");
+					tipoBeneficio="TH";
+				}
+    
     console.log('tipBen'+tipoBeneficio);
     var urlFinal ="/buscar_beneficio/"+tipoBeneficio;
    
@@ -59,6 +68,8 @@ function busca_beneficio() {
 				
 				$("#beneficio").val(data);
 				console.log("here",$("#beneficio").val());
+				
+				console.log("value",$("#tipo_beneficio").val());
 				$("#ingreso_beneficio_form").submit();
 			}
           
