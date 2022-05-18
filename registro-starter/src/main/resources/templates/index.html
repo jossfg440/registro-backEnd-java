@@ -1,18 +1,82 @@
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
 
+<head>
+    <title>Registro</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
  
- 
-<form action="#" th:action="@{/cliente}"  method="post">
+<body>
+<div class="container"> 
+ <div id="mensaje"></div>
+<form action="#" th:action="@{/cliente}" th:object="${clienteDto}" id="ingreso_beneficio_form" method="post">
     <label for="name">Nombre</label>
-    <input type="text"  id="nombre" placeholder="Nombre"><br/>
+    <input type="text" name="nombre" id="nombre" placeholder="Nombre"><br/>
     <label for="email">Email</label>
-    <input type="text" id="email" placeholder="Email"><br/>
+    <input type="text" name="email" id="email" placeholder="Email"><br/>
     <label for="email">Telefono</label>
-    <input type="text"  id="telefono" placeholder="Teléfono"><br/>
+    <input type="text" name="telefono" id="telefono" placeholder="Teléfono"><br/>
     
    <p> Quiero concursar en el grupo: <p/>
-    SK<input type="radio" th:id="tipoBeneficioSk" th:name="${tipoBeneficio}" value="SK" checked>
-    TH<input type="radio" th:id="tipoBeneficioTh" th:name="${tipoBeneficio}" value="TH" >
-
-    <input type="submit" value="Registro Cliente">   
+    SK<input type="radio" th:id="tipoBeneficio" name="tipoBeneficio" value="SK" checked>
+    TH<input type="radio" th:id="tipoBeneficio" name="tipoBeneficio" value="TH" >
+	<input type="hidden" name="beneficio" id="beneficio" >
+    <input type="button" value="Registro Cliente"  onClick="busca_beneficio();">   
 </form>
  <a th:href="@{/cliente}">Lista de Clientes</a>
+ 
+</div>
+<script type="text/javascript">
+
+
+function busca_beneficio() {
+
+    var search = {}
+    var tipoBeneficio = $("#tipoBeneficio").val();
+    console.log('tipBen'+tipoBeneficio);
+    var urlFinal ="/buscar_beneficio/"+tipoBeneficio;
+   
+    $.ajax({
+        type: "GET",
+        contentType: "application/json",
+        url: urlFinal,
+       
+        dataType: 'html',
+        cache: false,
+        timeout: 600000,
+        success: function (data) {
+
+          
+
+            console.log("SUCCESS1 : ", data);
+            if (data.includes("No existe beneficio") ){
+				  var json = "<h4> Información</h4><b>"
+                + JSON.stringify(data, null, 4) + "</b>";
+           		 $('#mensaje').html(json);
+			} else {
+				
+				$("#beneficio").val(data);
+				console.log("here",$("#beneficio").val());
+				$("#ingreso_beneficio_form").submit();
+			}
+          
+
+        },
+        error: function (e) {
+
+            var json = "<h4> Respuesta</h4>&lt;pre&gt;"
+                + e.responseText + "&lt;/pre&gt;";
+            $('#mensaje').html(json);
+
+            console.log("ERROR : ", e);
+         
+
+        }
+    });
+
+}
+</script>
+</body>
+</html>

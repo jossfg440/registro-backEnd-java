@@ -26,7 +26,7 @@ public class ManipulaXmlFile implements TipoBeneficioArchivo{
 	public String buscarBeneficio() {
 		String beneficio="" ;
 		try {
-		  File xmlFile = ResourceUtils.getFile("classpath:data/th_formato.xml");
+		  File xmlFile = ResourceUtils.getFile("classpath:th_formato.xml");
 		  DocumentBuilder builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
 		  Document doc = builder.parse(xmlFile);
 		  doc.getDocumentElement().normalize();

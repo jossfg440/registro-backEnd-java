@@ -7,10 +7,12 @@
   </parent>
   <artifactId>registro-jpa</artifactId>
   <dependencies>
+  
     <dependency>
   		<groupId>ec.gob.como</groupId>
   		<artifactId>registro-domain</artifactId>
     </dependency>
+   
     <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -62,7 +64,12 @@
                 </exclusion>
             </exclusions>
         </dependency>
-    
+
+        <dependency>
+        	<groupId>ec.gob.como</groupId>
+        	<artifactId>registro-archivo</artifactId>
+        	<version>0.0.1-SNAPSHOT</version>
+        </dependency>
   </dependencies>
   <build>
         <plugins>

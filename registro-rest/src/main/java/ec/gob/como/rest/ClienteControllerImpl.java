@@ -5,8 +5,10 @@ import java.util.List;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.client.RestTemplate;
 
 import ec.gob.como.core.service.ClienteService;
+
 import ec.gob.como.domain.data.ClienteDto;
 import ec.gob.como.domain.exception.ClienteNoExisteException;
 import lombok.extern.slf4j.Slf4j;
@@ -25,7 +27,15 @@ public class ClienteControllerImpl implements ClienteController {
 
 	@Override
 	public ResponseEntity<Void> addCliente(ClienteDto clienteDto) {
-		clienteService.addCliente(clienteDto);
+		 
+		/*
+		 String uri = "http://localhost:8080/buscar_beneficio/"+clienteDto.getTipoBeneficio();
+		 RestTemplate restTemplate = new RestTemplate();
+		 String beneficioEncontrado = restTemplate.getForObject(uri, String.class);
+		 if ( beneficioEncontrado !="No existe beneficio" ) {
+			
+		 } */
+		 clienteService.addCliente(clienteDto);
 		return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 

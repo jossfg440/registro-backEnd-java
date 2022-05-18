@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 
 public interface TipoBeneficioController {
 	
-	@GetMapping("/buscarBeneficio/{tipoBeneficio}")
+	@GetMapping("/buscar_beneficio/{tipoBeneficio}")
     ResponseEntity<String> getBuscarBeneficio(@PathVariable String tipoBeneficio);
 
 }

@@ -20,8 +20,8 @@ import static javax.persistence.GenerationType.IDENTITY;
 @Data
 public class ClienteEntity {
 	 	@Id
-	    @GeneratedValue(strategy = IDENTITY)
-	    @Column
+	   // @GeneratedValue(strategy = IDENTITY)
+	    @Column (nullable=false)
 	    private String nombre;
 	 	
 	 	@Column

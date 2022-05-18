@@ -1,8 +1,8 @@
 package ec.gob.como.jpa.adapter;
 
 import lombok.SneakyThrows;
-
-
+import ec.gob.como.archivo.operacion.ManipulaJsonFile;
+import ec.gob.como.archivo.operacion.ManipulaXmlFile;
 import ec.gob.como.domain.data.ClienteDto;
 import ec.gob.como.domain.port.ClientePersistenciaPort;
 import ec.gob.como.jpa.model.ClienteEntity;
@@ -69,13 +69,28 @@ public class ClienteJpaAdapter implements ClientePersistenciaPort {
 	}
 	
 	private ClienteEntity getClienteEntity(ClienteDto clienteDto){
+		
+		/*
+		String beneficio="";
+		if (clienteDto.getTipoBeneficio().equals("SK")) {
+			ManipulaJsonFile fila = new ManipulaJsonFile();
+			beneficio =fila.buscarBeneficio();
+			
+		} else if (clienteDto.getTipoBeneficio().equals("TH")) {
+			ManipulaXmlFile fila = new ManipulaXmlFile();
+			beneficio =fila.buscarBeneficio();
+			
+		}*/
+		
 		return ClienteEntity.builder()
-				.nombre(clienteDto.getNombre())
-				.email(clienteDto.getEmail())
-				.telefono(clienteDto.getTelefono())
-				.tipoBeneficio(clienteDto.getTipoBeneficio())
-				.beneficio(clienteDto.getBeneficio())
-				.build();
+					.nombre(clienteDto.getNombre())
+					.email(clienteDto.getEmail())
+					.telefono(clienteDto.getTelefono())
+					.tipoBeneficio(clienteDto.getTipoBeneficio())
+					.beneficio(clienteDto.getBeneficio())
+					.build();
+		
+		
 	}
 	
 	private ClienteDto getClientes(ClienteEntity clienteEntity) {
@@ -87,5 +102,7 @@ public class ClienteJpaAdapter implements ClientePersistenciaPort {
 				.beneficio(clienteEntity.getBeneficio())
 				.build();
 	}
+	
+	
 
 }

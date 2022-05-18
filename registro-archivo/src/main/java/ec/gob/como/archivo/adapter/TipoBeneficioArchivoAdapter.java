@@ -10,32 +10,43 @@ import ec.gob.como.domain.port.TipoBeneficioArchivoPort;
 @Service
 public class TipoBeneficioArchivoAdapter implements TipoBeneficioArchivoPort{
 
+	
 	private ManipulaJsonFile manipulaJsonFile;
 	private ManipulaXmlFile manipulaXmlFile;
 	
+	public  TipoBeneficioArchivoAdapter() {
+		
+	}
 	
+	public  TipoBeneficioArchivoAdapter(ManipulaJsonFile manipulaJsonFile,ManipulaXmlFile manipulaXmlFile) {
+		
+		this.manipulaJsonFile = manipulaJsonFile;
+		this.manipulaXmlFile = manipulaXmlFile;
+		
+	}
 	
-	public TipoBeneficioArchivoAdapter(ManipulaJsonFile manipulaJsonFile) {
+    public TipoBeneficioArchivoAdapter(ManipulaJsonFile manipulaJsonFile) {
 		
 		this.manipulaJsonFile = manipulaJsonFile;
 		
-	}
-	
-	public TipoBeneficioArchivoAdapter( ManipulaXmlFile manipulaXmlFile) {
 		
-	
-		this.manipulaXmlFile = manipulaXmlFile;
 	}
-
-
-
+    
+   public TipoBeneficioArchivoAdapter(ManipulaXmlFile manipulaXmlFile) {
+		
+		this.manipulaXmlFile = manipulaXmlFile;
+		
+	}
+	
 
 	@Override
 	public String buscarBeneficio(String tipoBeneficio) {
 		if (tipoBeneficio.endsWith("SK")) {
-			return manipulaJsonFile.buscarBeneficio();
+			ManipulaJsonFile fila = new ManipulaJsonFile();
+			return fila.buscarBeneficio();
 		} else {
-			return manipulaXmlFile.buscarBeneficio();
+			ManipulaXmlFile fila = new ManipulaXmlFile();
+			return fila.buscarBeneficio();
 		}
 	
 	}

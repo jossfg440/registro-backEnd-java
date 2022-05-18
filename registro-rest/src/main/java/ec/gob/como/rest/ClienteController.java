@@ -14,8 +14,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 
 public interface ClienteController {
-	@PostMapping("/cliente")
-    ResponseEntity<Void> addCliente(@RequestBody ClienteDto clienteDto);
+	
+	
+	@PostMapping(path="/cliente", consumes="application/x-www-form-urlencoded;charset=UTF-8")
+    ResponseEntity<Void> addCliente( ClienteDto clienteDto);
 
     @DeleteMapping("/cliente")
     ResponseEntity<String> removeCliente(@RequestBody ClienteDto clienteDto);

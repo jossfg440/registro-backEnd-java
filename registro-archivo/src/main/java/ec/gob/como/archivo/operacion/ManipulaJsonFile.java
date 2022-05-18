@@ -1,5 +1,6 @@
 package ec.gob.como.archivo.operacion;
 
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -22,7 +23,7 @@ public class ManipulaJsonFile implements TipoBeneficioArchivo {
 		String beneficio ;
 		try {
 		
-			File json = ResourceUtils.getFile("classpath:data/sk_formato.json");
+			File json = ResourceUtils.getFile("classpath:sk_formato.json");
 			Reader jsonReader = new FileReader(json);
 			Object obj = parser.parse(jsonReader);
 			JSONObject jsonObject = (JSONObject) obj;
@@ -30,12 +31,21 @@ public class ManipulaJsonFile implements TipoBeneficioArchivo {
 			
 			
 			if (skFormatoList.size() > 0 ) {
-				beneficio = (String) skFormatoList.get(0);
+				//beneficio =  skFormatoList.get(0);
+				JSONObject beneficioRecuperado = (JSONObject) skFormatoList.get(0);
+				beneficio = (String) beneficioRecuperado.get("beneficio");
 			    skFormatoList.remove(0);
 			    jsonObject.put("sk_formato" , skFormatoList);
 			    
-			    try (FileWriter file = new FileWriter("classpath:data/sk_formato.json")) {
-		            file.write(jsonObject.toJSONString());
+			    try (
+			    
+			    	FileWriter file = new FileWriter("classpath:sk_formato.json")) {
+		            //file.write(jsonObject.toJSONString());
+		            //file.close();
+		            
+		            BufferedWriter writer = new BufferedWriter(new FileWriter("classpath:sk_formato.json"));
+		            writer.write(jsonObject.toJSONString());
+		            writer.close();
 		        } catch (IOException e) {
 		            e.printStackTrace();
 		        }
